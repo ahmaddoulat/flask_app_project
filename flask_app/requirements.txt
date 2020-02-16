@@ -4,4 +4,4 @@ flask-security
 flask-wtf
 pymongo
 sshtunnel
-storygen
+inflect
