@@ -2,7 +2,7 @@ from flask import render_template, request, redirect, url_for, flash
 from flask_login import login_user, logout_user, login_required, current_user
 from passlib.hash import sha256_crypt
 import pymongo
-from storygen.storygen import Story
+from storygen import Story
 from sshtunnel import SSHTunnelForwarder
 
 from flask_app import app, db
