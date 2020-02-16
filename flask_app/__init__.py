@@ -118,4 +118,6 @@ def student_story_api(student_id, structure):
     elif structure == "outcome":
         return jsonify(student_story.outcome_story), 201
 
-from flask_app import routes
+# from flask_app import routes
+if __name__ == "__main__":
+    app.run(host='0.0.0.0')
