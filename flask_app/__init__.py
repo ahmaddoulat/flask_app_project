@@ -4,6 +4,7 @@ from flask_login import LoginManager
 import pymongo
 from storygen import Story
 from sshtunnel import SSHTunnelForwarder
+import json
 
 app = Flask(__name__)
 
@@ -89,27 +90,32 @@ def student_story_api(student_id, structure):
     if structure is None:
         return {'message': 'There is no structure selected', 'data': {}}, 404
 
-    MONGO_HOST = "REMOTE_IP_ADDRESS"
-    MONGO_DB = "eager_la_db"
-    MONGO_USER = "LOGIN"
-    MONGO_PASS = "PASSWORD"
-    print(student_id)
-    print(structure)
-    print('Connecting to pymongo database!!')
+#     MONGO_HOST = "REMOTE_IP_ADDRESS"
+#     MONGO_DB = "eager_la_db"
+#     MONGO_USER = "LOGIN"
+#     MONGO_PASS = "PASSWORD"
+#     print(student_id)
+#     print(structure)
+#     print('Connecting to pymongo database!!')
 
-    server = SSHTunnelForwarder(
-        "10.18.207.246",
-        ssh_username="adoulat",
-        ssh_password="Reset_my_password1986",
-        remote_bind_address=('127.0.0.1', 27017)
-    )
+#     server = SSHTunnelForwarder(
+#         "10.18.207.246",
+#         ssh_username="adoulat",
+#         ssh_password="Reset_my_password1986",
+#         remote_bind_address=('127.0.0.1', 27017)
+#     )
 
-    server.start()
+#     server.start()
 
-    client = pymongo.MongoClient('127.0.0.1', server.local_bind_port)  # server.local_bind_port is assigned local port
-    db = client[MONGO_DB]
-    col = db['students_data_cleaned_with_default_stories'].find({'student_id': student_id})
-    student_story = Story(col[0], selected_features)
+#     client = pymongo.MongoClient('127.0.0.1', server.local_bind_port)  # server.local_bind_port is assigned local port
+#     db = client[MONGO_DB]
+#     col = db['students_data_cleaned_with_default_stories'].find({'student_id': student_id})
+
+    with open("/home/flask_app_project/students/" + '800580594', 'rb') as f:
+        object_file = json.load(f)
+
+    student_story = Story(object_file, selected_features)
+#     student_story = Story(col[0], selected_features)
 
     if structure == "temporal":
         return jsonify(student_story.temporal_story), 201
