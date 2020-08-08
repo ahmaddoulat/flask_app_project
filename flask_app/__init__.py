@@ -57,17 +57,6 @@ def student_story_api(student_id, structure):
 
     student = mongo.db.students_data_cleaned.find({{'student_id': int(student_id)}})
 
-    # try:
-    #     client = MongoClient('localhost', 27017)
-    #     db = client.eager_la_db
-    #     collection = db.students_data_cleaned
-    #     curr_student = collection.find({'student_id': int(student_id)})
-    # except Exception as e:
-    #     return e
-    
-    # return "HI AHMAD!!"
-
-
     student_story = Story(student, selected_features)
 
     if structure == "temporal":
