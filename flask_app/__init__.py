@@ -1,11 +1,6 @@
 from flask import Flask, jsonify, request
 from flask import make_response
 from flask_pymongo import PyMongo
-from flask import jsonify
-import math
-from pprint import pprint
-# from flask_cors import CORS, cross_origin
-
 
 from storygen.storygen import Story
 import json
